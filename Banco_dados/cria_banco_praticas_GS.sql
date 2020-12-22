@@ -130,28 +130,30 @@ AGROFLORESTAL NO AGRESTE PARAIBANO', 'cartilha 1');
 
 INSERT INTO [sistema_especie] ([id_sistema_especie],[id_sistema],[id_especie],[funcao_planta],[espacamento_entreplantas],[espacamento_entrelinhas])
 VALUES
-(1, 1, 1, 'cultura principal', '0,2', '1,0')
+(1, 1, 1, 'cultura principal', '0,2', '1,0'),
 (2, 1, 2, 'consorcio-linha', 'nd', 'nd'),
 (3, 1, 3, 'consorcio-entrelinha', 'nd', 'nd'),
 (4, 1, 4, 'consorcio-adubadora', 'nd', 'nd');
 
 
 -- Exemplo de consulta
- select id_sistema, nome_cientifico, funcao_planta
-	from sistema
-	natural join sistema_especie
-	natural join especie_vegetal;
+-- se retirar o comentário
+-- da problema ao criar o banco na linha de comando
+ -- select id_sistema, nome_cientifico, funcao_planta
+	-- from sistema
+	-- natural join sistema_especie
+	-- natural join especie_vegetal;
 
 
 -- consulta com o nome popular.
 -- Pegando o primeiro resultado do nome popular
 -- Outros bancos aceitam usar o first como função agregadora.
 -- no SQLite é preciso buscar coluna com o menor ROWID
-
-select id_sistema, nome_pop, nome_cientifico, funcao_planta
-	from sistema
-	natural join sistema_especie
-	natural join especie_vegetal
-	natural join nome_popular
-	group by id_sistema, nome_cientifico, funcao_planta
-	having min(nome_popular.ROWID)
+--
+-- select id_sistema, nome_pop, nome_cientifico, funcao_planta
+-- 	from sistema
+-- 	natural join sistema_especie
+-- 	natural join especie_vegetal
+-- 	natural join nome_popular
+-- 	group by id_sistema, nome_cientifico, funcao_planta
+-- 	having min(nome_popular.ROWID)
