@@ -76,7 +76,7 @@ CREATE TABLE patogenos (
 	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
 	);
 
-	CREATE TABLE controle_patogenos (
+CREATE TABLE controle_patogenos (
 	id_patogeno_ctrl INTEGER PRIMARY KEY NOT NULL,
 	id_patogeno INTEGER,
 	insumo_pat TEXT,
@@ -84,7 +84,7 @@ CREATE TABLE patogenos (
 	FOREIGN KEY ("id_patogeno") REFERENCES "patogenos"("id_patogeno") ON DELETE NO ACTION
 	);
 	
-	CREATE TABLE patogenos_nome_pop (
+CREATE TABLE patogenos_nome_pop (
 	id_patogeno_pop INTEGER PRIMARY KEY NOT NULL,
 	id_patogeno INTEGER,
 	patogeno_pop TEXT,
