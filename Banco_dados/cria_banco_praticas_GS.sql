@@ -60,7 +60,46 @@ CREATE TABLE sistema_especie (
   FOREIGN KEY("id_sistema") REFERENCES "sistema"("id_sistema") ON DELETE NO ACTION
 );
 
+CREATE TABLE animal (
+	id_animal INTEGER PRIMARY KEY NOT NULL,
+	nome_animal TEXT,
+	raca_animal TEXT
+	exigencia_alimentacao TEXT
+	);
+	
+CREATE TABLE patogenos (
+	id_patogeno INTEGER PRIMARY KEY NOT NULL,
+	id_animal INTEGER,
+	patogeno_cien TEXT,
+	descricao_patogeno TEXT,
+	descricao_pat_sintoma TEXT,
+	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
+	);
 
+	CREATE TABLE controle_patogenos (
+	id_patogeno_ctrl INTEGER PRIMARY KEY NOT NULL,
+	id_patogeno INTEGER,
+	insumo_pat TEXT,
+	descricao_pat_ctrl TEXT,
+	FOREIGN KEY ("id_patogeno") REFERENCES "patogenos"("id_patogeno") ON DELETE NO ACTION
+	);
+	
+	CREATE TABLE patogenos_nome_pop (
+	id_patogeno_pop INTEGER PRIMARY KEY NOT NULL,
+	id_patogeno INTEGER,
+	patogeno_pop TEXT,
+	FOREIGN KEY ("id_patogeno") REFERENCES "patogenos"("id_patogeno") ON DELETE NO ACTION
+	);
+	
+CREATE TABLE sistema_animal (
+	id_sistema_animal INTEGER PRIMARY KEY NOT NULL,
+	id_sistema INTEGER,
+	id_animal INTEGER,
+	funcao_animal TEXT,
+	ciclo_animal TEXT,
+	FOREIGN KEY ("id_sistema") REFERENCES "sistema"("id_sistema") ON DELETE NO ACTION,
+	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
+	);
 
 INSERT INTO [especie_vegetal] ([id_especie],[nome_cientifico],[estrato], [exigencia_fert], [ciclo], [alimento_humano], [medicinal],[bioma_caract])
 VALUES
