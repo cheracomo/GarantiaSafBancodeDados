@@ -1,36 +1,11 @@
 CREATE TABLE ctrl_biologico_pragas (
-  id_ctrl_biologico INTEGER PRIMARY KEY NOT NULL,
+  id_praga INTEGER PRIMARY KEY NOT NULL,
   id_praga_cien INTEGER,
+  descricao_praga TEXT,
+  descricao_sintoma TEXT,
   insumo_ctrl_bio TEXT,
   descricao_crtl_bio TEXT,
   FOREIGN KEY(id_praga_cien) REFERENCES pragas(id_praga_cien) ON DELETE NO ACTION
-);
-
-CREATE TABLE especie_vegetal (
-  id_especie INTEGER PRIMARY KEY NOT NULL,
-  nome_cientifico TEXT,
-  estrato TEXT,
-  exigencia_fert TEXT,
-  ciclo TEXT,
-  alimento_humano TEXT,
-  medicinal TEXT,
-  bioma_caract TEXT
-);
-
-CREATE TABLE nome_popular (
-  id_nome_pop INTEGER PRIMARY KEY NOT NULL,
-  id_especie INTEGER NOT NULL,
-  nome_pop TEXT NOT NULL,
-  FOREIGN KEY(id_especie) REFERENCES especie_vegetal(id_especie) ON DELETE NO ACTION
-);
-
-CREATE TABLE pragas (
-  id_praga_cien INTEGER PRIMARY KEY NOT NULL,
-  id_planta INTEGER,
-  praga_cientifico TEXT,
-  descricao_praga TEXT,
-  descricao_sintoma TEXT,
-  FOREIGN KEY(id_planta) REFERENCES especie_vegetal
 );
 
 CREATE TABLE pragas_pop (
@@ -40,24 +15,53 @@ CREATE TABLE pragas_pop (
   FOREIGN KEY(id_praga_cien) REFERENCES pragas(id_praga_cien) ON DELETE NO ACTION
 );
 
+CREATE TABLE especie_vegetal (
+  id_especie INTEGER PRIMARY KEY NOT NULL,
+  nome_cientifico TEXT,
+  funcao TEXT,
+  resiliencia_especie INTEGER,
+  estrato TEXT,
+  colheita_poda_dias TEXT,
+  colheita_poda_anos TEXT,
+  );
+
+CREATE TABLE nome_popular (
+  id_nome_pop INTEGER PRIMARY KEY NOT NULL,
+  id_especie INTEGER NOT NULL,
+  nome_pop TEXT NOT NULL,
+  FOREIGN KEY(id_especie) REFERENCES especie_vegetal(id_especie) ON DELETE NO ACTION
+);
+
+CREATE TABLE cult_principal (
+  id_cult_principal INTEGER PRIMARY KEY NOT NULL,
+  id_especie INTEGER NOT NULL,
+  FOREIGN KEY(id_especie) REFERENCES especie_vegetal(id_especie) ON DELETE NO ACTION
+);
+
 CREATE TABLE sistema (
   id_sistema INTEGER PRIMARY KEY NOT NULL,
-  nome TEXT,
   descricao TEXT,
-  complexidade TEXT,
-  referencias TEXT,
   cartilha TEXT
 );
 
-CREATE TABLE sistema_especie (
-  id_sistema_especie INTEGER PRIMARY KEY NOT NULL,
+CREATE TABLE canteiro (
+  id_canteiro INTEGER PRIMARY KEY NOT NULL,
+  id_cult_principal INTEGER,
   id_sistema INTEGER,
-  id_especie INTEGER,
-  funcao_planta TEXT,
-  espacamento_entreplantas TEXT,
-  espacamento_entrelinhas TEXT,
-  FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie") ON DELETE NO ACTION,
+  funcao TEXT,
+  ciclo TEXT
+  descricao TEXT
+ FOREIGN KEY("id_cult_principal") REFERENCES "cult_principal"("id_cult_principal") ON DELETE NO ACTION,
   FOREIGN KEY("id_sistema") REFERENCES "sistema"("id_sistema") ON DELETE NO ACTION
+
+  );
+
+CREATE TABLE canteiro_especie (
+  id_canteiro_especie INTEGER PRIMARY KEY NOT NULL,
+  id_canteiro INTEGER,
+  id_especie INTEGER,
+  FOREIGN KEY("id_canteiro") REFERENCES "canteiro"("id_canteiro") ON DELETE NO ACTION,
+  FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie") ON DELETE NO ACTION
 );
 
 CREATE TABLE animal (
@@ -101,39 +105,57 @@ CREATE TABLE sistema_animal (
 	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
 	);
 
-INSERT INTO [especie_vegetal] ([id_especie],[nome_cientifico],[estrato], [exigencia_fert], [ciclo], [alimento_humano], [medicinal],[bioma_caract])
+
+INSERT INTO [especie_vegetal] ([id_especie],[nome_cientifico],[resiliencia_especie],[estrato], [colheita_poda_dias], [colheita_poda_anos])
 VALUES
-(1, 'Zea Mays', 'alto', 'media/alta', 'semestral', 'sim', 'nao', 'indet'),
-(2, 'Cajanus cajon', 'alto', 'media', 'bianual', 'sim', 'sim', 'cerrado/caatinga'),
-(3, 'Crotalaria sp', 'emergente', 'media', 'anual', 'nao', 'sim', 'cerrado/caatinga'),
-(4, 'Gliricidia Sepium', 'alto', 'alta', 'perene', 'nao', 'sim', 'cerrado/caatinga');
+(1, 'Zea Mays', '1', 'emergente', '90 a 120', '-'),
+(2, 'Vigna unguiculata', '2', 'alto', '90', '-'),
+(3, 'Cajanus cajon', '2', 'alto', '180 a 540', '0,5 a 1,5'),
+(4, 'Phaseolos vulgaris', '2', 'baixo', '60 a 90', '-'),
+(5, 'Crotalaria juncea', '2', 'emergente', '120', '-'),
+(6, 'Megathyrsus maximus', '2', 'médio', '180', '-');
 
 INSERT INTO [nome_popular] ([id_nome_pop],[id_especie],[nome_pop])
 VALUES
 (1, 1, 'milho'),
-(2, 2, 'feijao guandu'),
-(3, 2, 'guandu'),
-(4, 2, 'feijao de arvore'),
-(5, 3, 'crotalaria'),
-(6, 3, 'crotalaria juncea'),
-(7, 4, 'gliricidia'),
-(8, 4, 'coiote'),
-(9, 4, 'madre de cacau'),
-(10, 4, 'mata raton');
+(2, 2, 'feijao de corda'),
+(3, 2, 'feijao caupi'),
+(4, 2, 'feijao fradinho'),
+(5, 3, 'feijao guandu'),
+(6, 3, 'guandu'),
+(7, 3, 'feijao de arvore'),
+(8, 4, 'feijao faseolo'),
+(9, 4, 'feijao de arranque'),
+(10, 4, 'feijao carioca')
+(11, 4, 'feijao preto')
+(12, 5, 'crotalaria')
+(13, 5, 'crotalaria juncea')
+(14, 6, 'campim mombaça')
+(15, 4, 'mombaça');
 
-INSERT INTO [sistema] ([id_sistema],[descricao],[complexidade], [referencias], [cartilha])
+INSERT INTO [sistema] ([id_sistema], [descrição], [cartilha])
 VALUES
-(1, 'Sistema consorciado de milho como cultura principal, guandu junto com milho na linha, crotalaria como cultura de entrelinha e gliricidia como planta adubadora', 'Complexidade nivel 2: 2L,1E,1A', 'Sistema Santa Brígida – Tecnologia Embrapa: Consorciação de Milho com Leguminosas, EFEITO DA Gliricidia sepium SOBRE
-NUTRIENTES DO SOLO, MICROCLIMA E
-PRODUTIVIDADE DO MILHO EM SISTEMA
-AGROFLORESTAL NO AGRESTE PARAIBANO', 'cartilha 1');
+(1, 'Sistema de consórcio simples (algodão + feijões) com entrelinhas de mombaça + crotalária para fornecimento de matéria organica', 'cartilha 1');
 
-INSERT INTO [sistema_especie] ([id_sistema_especie],[id_sistema],[id_especie],[funcao_planta],[espacamento_entreplantas],[espacamento_entrelinhas])
+
+INSERT INTO [canteiro_especie] ([id_canteiro_especie],[id_canteiro],[id_especie])
 VALUES
-(1, 1, 1, 'cultura principal', '0,2', '1,0')
-(2, 1, 2, 'consorcio-linha', 'nd', 'nd'),
-(3, 1, 3, 'consorcio-entrelinha', 'nd', 'nd'),
-(4, 1, 4, 'consorcio-adubadora', 'nd', 'nd');
+(1, 1, 1), 
+(2, 1, 2),
+(3, 1, 3),
+(4,1,4), 
+(5,2,5), 
+(6,2,6);
+
+
+
+INSERT INTO [canteiro] ([id_canteiro],[id_cult_principal],[id_sistema], [funcao],[ciclo],[descricao])
+VALUES
+(1,1,1,'canteiro principal','anual','Canteiro com 3m de largura: Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(2,1,1,'entrelinha adubadora','anual','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária e 10kg/ha de mombaça')
+;
+
+
 
 
 -- Exemplo de consulta
