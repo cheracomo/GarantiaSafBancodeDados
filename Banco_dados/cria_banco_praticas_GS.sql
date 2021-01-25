@@ -1,3 +1,55 @@
+CREATE TABLE "especie_vegetal" (
+	"id_especie"	INTEGER NOT NULL,
+	"nome_cientificco"	TEXT,
+	"resiliencia_especie"	INTEGER,
+	"estrato"	TEXT,
+	"colheita_poda_dias"	TEXT,
+	"colheita_poda_anos"	TEXT,
+	PRIMARY KEY("id_especie")
+);
+
+CREATE TABLE "sistema" (
+	"id_sistema"	INTEGER NOT NULL,
+	"descricao_sist" TEXT,
+	"cartilha"	TEXT,
+	PRIMARY KEY("id_sistema")
+);
+
+CREATE TABLE "cult_principal" (
+	"id_cult_principal"	INTEGER NOT NULL,
+	"id_especie"	INTEGER,
+	PRIMARY KEY("id_cult_principal"),
+	FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie")
+);
+
+CREATE TABLE "nome_popular" (
+	"id_nome_pop"	INTEGER NOT NULL,
+	"id_especie"	INTEGER,
+	"nome_pop" TEXT,
+	PRIMARY KEY("id_nome_pop"),
+	FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie")
+);
+
+
+CREATE TABLE "canteiro" (
+	"id_canteiro"	INTEGER NOT NULL,
+	"id_cult_principal"	INTEGER,
+	"id_sistema" INTEGER,
+	"funcao_canteiro" TEXT,
+	"descricao" TEXT,
+	PRIMARY KEY("id_canteiro"),
+	FOREIGN KEY("id_cult_principal") REFERENCES "cult_principal"("id_cult_principal"),
+	FOREIGN KEY("id_sistema") REFERENCES "sistema"("id_sistema")
+);
+
+CREATE TABLE "especie_canteiro" (
+	"id_canteiro_especie"	INTEGER NOT NULL,
+	"id_canteiro"	INTEGER,
+	"id_especie"	INTEGER,
+	FOREIGN KEY("id_canteiro") REFERENCES "canteiro"("id_canteiro"),
+	FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie")
+);
+
 CREATE TABLE ctrl_biologico_pragas (
   id_praga INTEGER PRIMARY KEY NOT NULL,
   id_praga_cien INTEGER,
@@ -15,59 +67,10 @@ CREATE TABLE pragas_pop (
   FOREIGN KEY(id_praga_cien) REFERENCES pragas(id_praga_cien) ON DELETE NO ACTION
 );
 
-CREATE TABLE especie_vegetal (
-  id_especie INTEGER PRIMARY KEY NOT NULL,
-  nome_cientifico TEXT,
-  funcao TEXT,
-  resiliencia_especie INTEGER,
-  estrato TEXT,
-  colheita_poda_dias TEXT,
-  colheita_poda_anos TEXT,
-  );
-
-CREATE TABLE nome_popular (
-  id_nome_pop INTEGER PRIMARY KEY NOT NULL,
-  id_especie INTEGER NOT NULL,
-  nome_pop TEXT NOT NULL,
-  FOREIGN KEY(id_especie) REFERENCES especie_vegetal(id_especie) ON DELETE NO ACTION
-);
-
-CREATE TABLE cult_principal (
-  id_cult_principal INTEGER PRIMARY KEY NOT NULL,
-  id_especie INTEGER NOT NULL,
-  FOREIGN KEY(id_especie) REFERENCES especie_vegetal(id_especie) ON DELETE NO ACTION
-);
-
-CREATE TABLE sistema (
-  id_sistema INTEGER PRIMARY KEY NOT NULL,
-  descricao TEXT,
-  cartilha TEXT
-);
-
-CREATE TABLE canteiro (
-  id_canteiro INTEGER PRIMARY KEY NOT NULL,
-  id_cult_principal INTEGER,
-  id_sistema INTEGER,
-  funcao TEXT,
-  ciclo TEXT
-  descricao TEXT
- FOREIGN KEY("id_cult_principal") REFERENCES "cult_principal"("id_cult_principal") ON DELETE NO ACTION,
-  FOREIGN KEY("id_sistema") REFERENCES "sistema"("id_sistema") ON DELETE NO ACTION
-
-  );
-
-CREATE TABLE canteiro_especie (
-  id_canteiro_especie INTEGER PRIMARY KEY NOT NULL,
-  id_canteiro INTEGER,
-  id_especie INTEGER,
-  FOREIGN KEY("id_canteiro") REFERENCES "canteiro"("id_canteiro") ON DELETE NO ACTION,
-  FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie") ON DELETE NO ACTION
-);
-
 CREATE TABLE animal (
 	id_animal INTEGER PRIMARY KEY NOT NULL,
 	nome_animal TEXT,
-	raca_animal TEXT
+	raca_animal TEXT,
 	exigencia_alimentacao TEXT
 	);
 	
@@ -105,17 +108,18 @@ CREATE TABLE sistema_animal (
 	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
 	);
 
+-----------------------------------------------------------------
 
-INSERT INTO [especie_vegetal] ([id_especie],[nome_cientifico],[resiliencia_especie],[estrato], [colheita_poda_dias], [colheita_poda_anos])
-VALUES
-(1, 'Zea Mays', '1', 'emergente', '90 a 120', '-'),
-(2, 'Vigna unguiculata', '2', 'alto', '90', '-'),
-(3, 'Cajanus cajon', '2', 'alto', '180 a 540', '0,5 a 1,5'),
-(4, 'Phaseolos vulgaris', '2', 'baixo', '60 a 90', '-'),
-(5, 'Crotalaria juncea', '2', 'emergente', '120', '-'),
-(6, 'Megathyrsus maximus', '2', 'médio', '180', '-');
+INSERT INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
+VALUES 
+(1, 'Zea Mays', 1, 'emergente', '90 a 120', '-'),
+(2, 'Vigna unguiculata', 2, 'alto', '90', '-'),
+(3, 'Cajanus cajon', 2, 'alto', '180 a 540', '0,5 a 1,5'),
+(4, 'Phaseolos vulgaris', 2, 'baixo', '60 a 90', '-'),
+(5, 'Crotalaria juncea', 2, 'emergente', '120', '-'),
+(6, 'Megathyrsus maximus', 2, 'médio', '180', '-');
 
-INSERT INTO [nome_popular] ([id_nome_pop],[id_especie],[nome_pop])
+INSERT INTO nome_popular (id_nome_pop,id_especie,nome_pop)
 VALUES
 (1, 1, 'milho'),
 (2, 2, 'feijao de corda'),
@@ -126,19 +130,35 @@ VALUES
 (7, 3, 'feijao de arvore'),
 (8, 4, 'feijao faseolo'),
 (9, 4, 'feijao de arranque'),
-(10, 4, 'feijao carioca')
-(11, 4, 'feijao preto')
-(12, 5, 'crotalaria')
-(13, 5, 'crotalaria juncea')
-(14, 6, 'campim mombaça')
+(10, 4, 'feijao carioca'),
+(11, 4, 'feijao preto'),
+(12, 5, 'crotalaria'),
+(13, 5, 'crotalaria juncea'),
+(14, 6, 'campim mombaça'),
 (15, 4, 'mombaça');
 
-INSERT INTO [sistema] ([id_sistema], [descrição], [cartilha])
+INSERT INTO sistema (id_sistema, descricao_sist, cartilha)
 VALUES
 (1, 'Sistema de consórcio simples (algodão + feijões) com entrelinhas de mombaça + crotalária para fornecimento de matéria organica', 'cartilha 1');
 
 
-INSERT INTO [canteiro_especie] ([id_canteiro_especie],[id_canteiro],[id_especie])
+INSERT INTO cult_principal (id_cult_principal,id_especie)
+VALUES
+(1, 1);
+
+"id_canteiro"	INTEGER NOT NULL,
+	"id_cult_principal"	INTEGER,
+	"id_sistema" INTEGER,
+	"funcao_canteiro" TEXT,
+	"descricao" TEXT,
+
+INSERT INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funcao_canteiro, descricao)
+VALUES
+(1,1,1,'canteiro principal','Canteiro com 3m de largura: Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(2,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária e 10kg/ha de mombaça')
+;
+
+INSERT INTO especie_canteiro (id_canteiro_especie,id_canteiro,id_especie)
 VALUES
 (1, 1, 1), 
 (2, 1, 2),
@@ -148,15 +168,7 @@ VALUES
 (6,2,6);
 
 
-
-INSERT INTO [canteiro] ([id_canteiro],[id_cult_principal],[id_sistema], [funcao],[ciclo],[descricao])
-VALUES
-(1,1,1,'canteiro principal','anual','Canteiro com 3m de largura: Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
-(2,1,1,'entrelinha adubadora','anual','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária e 10kg/ha de mombaça')
-;
-
-
-
+----------------------------------------------------------------------------------------
 
 -- Exemplo de consulta
  select id_sistema, nome_cientifico, funcao_planta
