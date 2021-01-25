@@ -50,6 +50,7 @@ CREATE TABLE "especie_canteiro" (
 	FOREIGN KEY("id_especie") REFERENCES "especie_vegetal"("id_especie")
 );
 
+
 CREATE TABLE ctrl_biologico_pragas (
   id_praga INTEGER PRIMARY KEY NOT NULL,
   id_praga_cien INTEGER,
@@ -108,18 +109,23 @@ CREATE TABLE sistema_animal (
 	FOREIGN KEY ("id_animal") REFERENCES "animal"("id_animal") ON DELETE NO ACTION
 	);
 
+
 -----------------------------------------------------------------
 
-INSERT INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
+INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
 VALUES 
 (1, 'Zea Mays', 1, 'emergente', '90 a 120', '-'),
 (2, 'Vigna unguiculata', 2, 'alto', '90', '-'),
 (3, 'Cajanus cajon', 2, 'alto', '180 a 540', '0,5 a 1,5'),
-(4, 'Phaseolos vulgaris', 2, 'baixo', '60 a 90', '-'),
+(4, 'Phaseolos vulgaris', 2, 'baixo', '80 a 90', '-'),
 (5, 'Crotalaria juncea', 2, 'emergente', '120', '-'),
-(6, 'Megathyrsus maximus', 2, 'médio', '180', '-');
+(6, 'Megathyrsus maximus', 2, 'médio', '180', '-'),
+(7, 'Phaseolos vulgaris', 2, 'baixo', '50 a 80', '-'),
+(8, 'Vicia faba', 2, 'médio', '100 a 240', '-'),
+(9, 'Gossypium hirstum', 2, 'alto', '140 a 180', '-'),
+(10, 'Crotalaria spectabilis', 2, 'emergente', '120', '-');
 
-INSERT INTO nome_popular (id_nome_pop,id_especie,nome_pop)
+INSERT or REPLACE INTO nome_popular (id_nome_pop,id_especie,nome_pop)
 VALUES
 (1, 1, 'milho'),
 (2, 2, 'feijao de corda'),
@@ -135,11 +141,21 @@ VALUES
 (12, 5, 'crotalaria'),
 (13, 5, 'crotalaria juncea'),
 (14, 6, 'campim mombaça'),
-(15, 4, 'mombaça');
+(15, 6, 'mombaça'),
+(16, 7, 'vagem rasteira'),
+(17, 8, 'fava'),
+(18, 8, 'feijao manteiga'),
+(19, 8, 'feijao espadinho'),
+(20, 8, 'feijao favona'),
+(21, 8, 'feijao verde'),
+(22, 9, 'algodao'),
+(23, 10, 'crotalaria'),
+(24, 10, 'crotalaria spectabilis')
+;
 
-INSERT INTO sistema (id_sistema, descricao_sist, cartilha)
+INSERT or REPLACE INTO sistema (id_sistema, descricao_sist, cartilha)
 VALUES
-(1, 'Sistema de consórcio simples (algodão + feijões) com entrelinhas de mombaça + crotalária para fornecimento de matéria organica', 'cartilha 1');
+(1, 'Sistema de milho com consórcio simples utilizando entrelinhas de mombaça + crotalária para fornecimento de matéria organica', 'cartilha 1');
 
 
 INSERT INTO cult_principal (id_cult_principal,id_especie)
@@ -147,20 +163,48 @@ VALUES
 (1, 1);
 
 
-INSERT INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funcao_canteiro, descricao)
+INSERT or replace INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funcao_canteiro, descricao)
 VALUES
-(1,1,1,'canteiro principal','Canteiro com 3m de largura: Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
-(2,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária e 10kg/ha de mombaça')
-;
+(1,1,1,'1.1 - canteiro principal','Milho-feijão: Canteiro com 3m de largura. Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(2,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária juncea e 10kg/ha de mombaça'),
+(3,1,1,'1.2 - canteiro principal','Milho-feijão-vagem: Canteiro com 3m de largura. Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(4,1,1,'1.3 - canteiro principal','Milho-algodão-fava-feijão: Canteiro com 3m de largura. Linha central de algodão (espaçamento: 1,0 m); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(5,1,1,'1.3 - canteiro principal','Milho-algodão-fava-vagem: Canteiro com 3m de largura. Linha central de algodão (espaçamento: 1,0 m); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(6,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 10kg/ha de crotalária juncea, 10kg/ha de crotalaria spectabilis e 10kg/ha de mombaça'),
+(7,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária spectabilis e 10kg/ha de mombaça');
 
-INSERT INTO especie_canteiro (id_canteiro_especie,id_canteiro,id_especie)
+INSERT or REPLACE INTO especie_canteiro (id_canteiro_especie,id_canteiro,id_especie)
 VALUES
 (1, 1, 1), 
 (2, 1, 2),
 (3, 1, 3),
 (4,1,4), 
+
 (5,2,5), 
-(6,2,6);
+(6,2,6),
+
+(7, 3, 1), 
+(8, 3, 2),
+(9, 3, 3),
+(10,3,7),
+
+(11, 4, 1), 
+(12, 4, 8),
+(13, 4, 9),
+(14, 4, 4),
+
+(15, 5, 1), 
+(16, 5, 8),
+(17, 5, 9),
+(18, 5, 7),
+
+(19,6,5), 
+(20,6,6),
+(21,6,10),
+
+(22,7,6),
+(23,7,10);
+
 
 
 ----------------------------------------------------------------------------------------
