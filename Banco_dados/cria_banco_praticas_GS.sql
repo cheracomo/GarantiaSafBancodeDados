@@ -146,11 +146,6 @@ INSERT INTO cult_principal (id_cult_principal,id_especie)
 VALUES
 (1, 1);
 
-"id_canteiro"	INTEGER NOT NULL,
-	"id_cult_principal"	INTEGER,
-	"id_sistema" INTEGER,
-	"funcao_canteiro" TEXT,
-	"descricao" TEXT,
 
 INSERT INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funcao_canteiro, descricao)
 VALUES
