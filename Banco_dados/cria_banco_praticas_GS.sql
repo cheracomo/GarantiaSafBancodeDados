@@ -228,3 +228,15 @@ select id_sistema, nome_pop, nome_cientifico, funcao_planta
 	natural join nome_popular
 	group by id_sistema, nome_cientifico, funcao_planta
 	having min(nome_popular.ROWID)
+
+
+SELECT id_sistema, nome_pop, nome_cientificco
+FROM sistema
+natural join  
+
+SELECT id_canteiro, funcao_canteiro, descricao,nome_cientificco, colheita_poda_dias
+from sistema
+	natural join canteiro
+	natural join especie_canteiro
+	natural join especie_vegetal
+	order by id_canteiro;
