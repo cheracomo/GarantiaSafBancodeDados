@@ -169,7 +169,7 @@ VALUES
 (2,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária juncea e 10kg/ha de mombaça'),
 (3,1,1,'1.2 - canteiro principal','Milho-feijão-vagem: Canteiro com 3m de largura. Linha central de guandú (espaçamento:0,75 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
 (4,1,1,'1.3 - canteiro principal','Milho-algodão-fava-feijão: Canteiro com 3m de largura. Linha central de algodão (espaçamento: 1,0 m); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
-(5,1,1,'1.3 - canteiro principal','Milho-algodão-fava-vagem: Canteiro com 3m de largura. Linha central de algodão (espaçamento: 1,0 m); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(5,1,1,'1.4 - canteiro principal','Milho-algodão-fava-vagem: Canteiro com 3m de largura. Linha central de algodão (espaçamento: 1,0 m); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
 (6,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 10kg/ha de crotalária juncea, 10kg/ha de crotalaria spectabilis e 10kg/ha de mombaça'),
 (7,1,1,'entrelinha adubadora','fazer uma muvuca com as sementes na porporção de 20kg/ha de crotalária spectabilis e 10kg/ha de mombaça');
 
@@ -205,8 +205,34 @@ VALUES
 (22,7,6),
 (23,7,10);
 
+----------------------------------------------------------------------------------------
+INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
+VALUES 
+(11, 'Manihot esculenta', 3 , 'alto', '180 a 720', '0,5 a 2');
+
+INSERT or REPLACE INTO nome_popular (id_nome_pop,id_especie,nome_pop)
+VALUES
+(25, 11, 'mandioca'),
+(26, 11, 'macaxeira'),
+(27, 11, 'aipim');
+
+INSERT or replace INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funcao_canteiro, descricao)
+VALUES
+(8,1,1,'1.5 - canteiro principal','Milho-mandioca-feijão: Canteiro com 3m de largura. Linha central de mandioca (espaçamento:1,5 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
+(9,1,1,'1.6 - canteiro principal','Milho-mandioca-feijão-vagem: Canteiro com 3m de largura. Linha central de mandioca (espaçamento:1,5 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)');
 
 
+INSERT or REPLACE INTO especie_canteiro (id_canteiro_especie,id_canteiro,id_especie)
+VALUES
+(24, 8, 1), 
+(25, 8, 2),
+(26, 8, 11),
+(27,8,4),
+
+(28, 9, 1), 
+(29, 9, 2),
+(30, 9, 11),
+(31,9,7);
 ----------------------------------------------------------------------------------------
 
 -- Exemplo de consulta
