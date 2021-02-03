@@ -1,6 +1,6 @@
 CREATE TABLE "especie_vegetal" (
 	"id_especie"	INTEGER NOT NULL,
-	"nome_cientificco"	TEXT,
+	"nome_cientifico"	TEXT,
 	"resiliencia_especie"	INTEGER,
 	"estrato"	TEXT,
 	"colheita_poda_dias"	TEXT,
@@ -112,7 +112,7 @@ CREATE TABLE sistema_animal (
 
 -----------------------------------------------------------------
 
-INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
+INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientifico, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
 VALUES 
 (1, 'Zea Mays', 1, 'emergente', '90 a 120', '-'),
 (2, 'Vigna unguiculata', 2, 'alto', '90', '-'),
@@ -206,7 +206,7 @@ VALUES
 (23,7,10);
 
 ----------------------------------------------------------------------------------------
-INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientificco, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
+INSERT or REPLACE INTO especie_vegetal (id_especie,nome_cientifico, resiliencia_especie, estrato, colheita_poda_dias, colheita_poda_anos)
 VALUES 
 (11, 'Manihot esculenta', 3 , 'alto', '180 a 720', '0,5 a 2');
 
@@ -256,11 +256,11 @@ select id_sistema, nome_pop, nome_cientifico, funcao_planta
 	having min(nome_popular.ROWID)
 
 
-SELECT id_sistema, nome_pop, nome_cientificco
+SELECT id_sistema, nome_pop, nome_cientifico
 FROM sistema
 natural join  
 
-SELECT id_canteiro, funcao_canteiro, descricao,nome_cientificco, colheita_poda_dias
+SELECT id_canteiro, funcao_canteiro, descricao,nome_cientifico, colheita_poda_dias
 from sistema
 	natural join canteiro
 	natural join especie_canteiro
