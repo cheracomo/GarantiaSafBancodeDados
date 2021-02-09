@@ -279,10 +279,10 @@ INSERT or replace INTO canteiro (id_canteiro,id_cult_principal,id_sistema, funca
 VALUES
 (8,1,1,'1.5 - canteiro principal','Milho-mandioca-feijão: Canteiro com 3m de largura. Linha central de mandioca (espaçamento:1,5 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); feijão faseolo com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
 (9,1,1,'1.6 - canteiro principal','Milho-mandioca-feijão-vagem: Canteiro com 3m de largura. Linha central de mandioca (espaçamento:1,5 m); duas linhas de milho intercalado com feijão de corda (espaçamento entre linhas 1,5m e entreplantas (milho-feijão de corda) 0,5m); vagem rasteira com espaçamento de monocultura nas bordas do canteiro (0,3 m x 0,3 m)'),
-(10,1,1,'1.7 - arvores do futuro','Angico-leucena-oiticica: Canteiro com 3m de largura. Linha central de angico, leucena e oiticica (espaçamento:6 m entre cada angico 6 m entre cada leucena e 3 m entre cada oiticica); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e quatro linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)'),
-(11,1,1,'1.8 - arvores do futuro','Angico-leucena-umbu: Canteiro com 3m de largura. Linha central de angico, leucena e umbu (espaçamento:6 m entre cada angico 6 m entre cada leucena e 3 m entre cada umbu); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e quatro linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)'),
-(12,1,1,'1.9 - arvores do futuro','Mandacaru-leucena-sisal: Canteiro com 3m de largura. Linha central de mandacaru e leucena (espaçamento:6 m entre cada leucena e 1,5 a cada mandacaru); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e tres linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas); duas linhas de sisal bem proximas a linha central com 0,5 m de espaçamento entre plantas'),
-(13,1,1,'1.10 - arvores do futuro','Emburana-leucena-sisal: Canteiro com 3m de largura. Linha central de emburana e leucena (espaçamento:6 m entre cada leucena e 6 m a cada emburana); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e tres linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)duas linhas de sisal bem proximas a linha central com 0,5 m de espaçamento entre plantas');
+(11,1,1,'1.7 - arvores do futuro','Angico-leucena-oiticica: Canteiro com 3m de largura. Linha central de angico, leucena e oiticica (espaçamento:6 m entre cada angico 6 m entre cada leucena e 3 m entre cada oiticica); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e quatro linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)'),
+(12,1,1,'1.8 - arvores do futuro','Angico-leucena-umbu: Canteiro com 3m de largura. Linha central de angico, leucena e umbu (espaçamento:6 m entre cada angico 6 m entre cada leucena e 3 m entre cada umbu); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e quatro linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)'),
+(13,1,1,'1.9 - arvores do futuro','Mandacaru-leucena-sisal: Canteiro com 3m de largura. Linha central de mandacaru e leucena (espaçamento:6 m entre cada leucena e 1,5 a cada mandacaru); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e tres linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas); duas linhas de sisal bem proximas a linha central com 0,5 m de espaçamento entre plantas'),
+(14,1,1,'1.10 - arvores do futuro','Emburana-leucena-sisal: Canteiro com 3m de largura. Linha central de emburana e leucena (espaçamento:6 m entre cada leucena e 6 m a cada emburana); duas linhas de milho intercalado com fava (espaçamento entre linhas 1,5m e entreplantas (milho-fava) 0,5m); duas linhas de abacaxi (0,5m entre plantas) e tres linhas de amendoim (0,5 entre linhas e 0,5 m entre plantas)duas linhas de sisal bem proximas a linha central com 0,5 m de espaçamento entre plantas');
 
 
 
@@ -298,33 +298,33 @@ VALUES
 (30, 9, 11),
 (31,9,7),
 
-(32, 10, 1), 
-(33, 10, 12),
-(34, 10, 13),
-(35,10,14),
-(36, 10, 15), 
-(37, 10, 16),
+(32, 11, 1), 
+(33, 11, 12),
+(34, 11, 13),
+(35,11,14),
+(36, 11, 15), 
+(37, 11, 16),
 
-(38, 11, 1), 
-(39, 11, 12),
-(40, 11, 13),
-(41, 11, 20),
-(42, 11, 15), 
-(43, 11, 16),
+(38, 12, 1), 
+(39, 12, 12),
+(40, 12, 13),
+(41, 12, 20),
+(42, 12, 15), 
+(43, 12, 16),
 
-(44, 12, 1), 
-(45, 12, 19),
-(46, 12, 13),
-(47, 12, 18),
-(48, 12, 15), 
-(49, 12, 16),
+(44, 13, 1), 
+(45, 13, 19),
+(46, 13, 13),
+(47, 13, 18),
+(48, 13, 15), 
+(49, 13, 16),
 
-(50, 13, 1), 
-(51, 13, 17),
-(52, 13, 13),
-(53, 13, 20),
-(54, 13, 15), 
-(55, 13, 16);
+(50, 14, 1), 
+(51, 14, 17),
+(52, 14, 13),
+(53, 14, 20),
+(54, 14, 15), 
+(55, 14, 16);
 
 
 
